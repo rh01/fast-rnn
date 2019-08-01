@@ -10,7 +10,7 @@
 
 ## 声明
 
-本仓库fork自 https://github.com/rbgirshick/fast-rcnn，并根据自己的环境做了一些修改。
+本仓库fork自 https://github.com/rbgirshick/fast-rcnn ，并根据自己的环境做了一些修改。
 
 
 
