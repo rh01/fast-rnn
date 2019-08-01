@@ -18,6 +18,7 @@ import argparse
 import pprint
 import numpy as np
 import sys
+import google.protobuf.text_format
 
 def parse_args():
     """

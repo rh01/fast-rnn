@@ -12,6 +12,9 @@ Demo script showing detections in sample images.
 
 See README.md for installation instructions before running.
 """
+import matplotlib as mpl
+mpl.use('Agg')
+
 
 import _init_paths
 from fast_rcnn.config import cfg
@@ -30,7 +33,7 @@ CLASSES = ('__background__',
            'cow', 'diningtable', 'dog', 'horse',
            'motorbike', 'person', 'pottedplant',
            'sheep', 'sofa', 'train', 'tvmonitor')
-
+#/home/shh/fast-rcnn/output/default/voc_2007_test/vgg_cnn_m_1024_fast_rcnn_iter_40000
 NETS = {'vgg16': ('VGG16',
                   'vgg16_fast_rcnn_iter_40000.caffemodel'),
         'vgg_cnn_m_1024': ('VGG_CNN_M_1024',
@@ -38,7 +41,7 @@ NETS = {'vgg16': ('VGG16',
         'caffenet': ('CaffeNet',
                      'caffenet_fast_rcnn_iter_40000.caffemodel')}
 
-
+#output/default/voc_2007_trainval/vgg16_fast_rcnn_iter_40000.caffemodel
 def vis_detections(im, class_name, dets, thresh=0.5):
     """Draw detected bounding boxes."""
     inds = np.where(dets[:, -1] >= thresh)[0]
@@ -129,7 +132,11 @@ if __name__ == '__main__':
 
     prototxt = os.path.join(cfg.ROOT_DIR, 'models', NETS[args.demo_net][0],
                             'test.prototxt')
-    caffemodel = os.path.join(cfg.ROOT_DIR, 'data', 'fast_rcnn_models',
+    #caffemodel = os.path.join(cfg.ROOT_DIR, 'data', 'fast_rcnn_models',
+                              #NETS[args.demo_net][1])
+    #vgg_cnn_model: /home/shh/fast-rcnn/output/default/voc_2007_test/vgg_cnn_m_1024_fast_rcnn_iter_40000
+    #/home/shh/fast-rcnn/output/default/voc_2007_test/caffenet_fast_rcnn_iter_40000
+    caffemodel = os.path.join(cfg.ROOT_DIR, 'output', 'default','voc_2007_trainval',
                               NETS[args.demo_net][1])
 
     if not os.path.isfile(caffemodel):
@@ -148,9 +155,12 @@ if __name__ == '__main__':
     print '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
     print 'Demo for data/demo/000004.jpg'
     demo(net, '000004', ('car',))
+    plt.show()
+    plt.savefig('result1.png')
 
     print '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
     print 'Demo for data/demo/001551.jpg'
     demo(net, '001551', ('sofa', 'tvmonitor'))
 
     plt.show()
+    plt.savefig('result2.png')
